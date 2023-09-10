@@ -12,6 +12,11 @@ services:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
       - ./mysql_data:/var/lib/mysql
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 500M
   degarden:
     container_name: degarden
     image: mthuandkp/degarden-api:v1.0
@@ -23,3 +28,8 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - mysqldb
+    deploy:
+      resources:
+        limits:
+          cpus: "1"    # Limit to 1 CPU core
+          memory: 1G   # Limit to 1GB of memory
